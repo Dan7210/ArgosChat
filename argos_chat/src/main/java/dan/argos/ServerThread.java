@@ -129,8 +129,7 @@ public class ServerThread extends Thread {
             destroySelf();
         }
         catch(Exception e) {
-            System.out.println("Oh no... Our Generic Exception... It's broken!");
-            e.printStackTrace();
+            System.out.println("Oh no... Our Generic Thread Exception... It's broken!");
             destroySelf();
         }
     }
@@ -158,8 +157,7 @@ public class ServerThread extends Thread {
             }
         }
         catch(IOException e) {
-            System.out.println("Oh no... Our IOException... It's broken!");
-            e.printStackTrace();
+            System.out.println("(Error) Thread IOException. Disconnecting Thread.");
             destroySelf();
         }
     }

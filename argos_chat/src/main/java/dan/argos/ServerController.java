@@ -36,16 +36,15 @@ public class ServerController extends Thread {
             genUUIDKey();
         }
         //Set desired port number and create new serverSocket
-        System.out.println(numThreads + " connections available. (Number is 4x amount of logical threads available to server.)");
+        System.out.println("(Info) " + numThreads + " connections available. (Number is 4x amount of logical threads available to server.)");
         connectionKey = cK; //Sets optional connection password
         try {
             serverSocket = new ServerSocket(34040);
-            System.out.println("New server socket created on port 34040.");
+            System.out.println("(Info) New server socket created on port 34040.");
             //serverSocket.setSoTimeout(100000); //Sets timeout time - Do not set/uncomment.
         }
         catch(IOException e) {
-            System.out.println("Exception occurred when creating serverSocket");
-            e.printStackTrace();
+            System.out.println("(Error) Exception occurred when creating serverSocket");
         }
         
         //Every 2.5 seconds check how many threads are still alive using ping-pong system and update user-count. Very latent connections may switch between being
@@ -76,16 +75,14 @@ public class ServerController extends Thread {
                     chatThreads.get(chatThreads.size()-1).start();
                 }
                 else {
-                    System.out.println("Threads full");
+                    System.out.println("Threads full. No more room for connections. If the server is still performing well and you wish to expand capacity, edit line 25 of the ServerController.java file in the source and recompile. Or, report this issue to the developer so that we can expand capacity for the next release.");
                 }
             }
             catch(SocketTimeoutException s) {
-                System.out.println("Socket timeout exception.");
-                s.printStackTrace();
+                System.out.println("(Warning) Socket timeout exception.");
             }
             catch(IOException e) {
-                System.out.println("Oh no... Our IOException... It's broken!");
-                e.printStackTrace();
+                System.out.println("(Warning) IO Exception. Someone may have unsafely disconnected.");
             }
         }
     }
@@ -117,7 +114,6 @@ public class ServerController extends Thread {
             System.out.println("Profanity file read.");
         }
         catch(Exception e) {
-            e.printStackTrace();
             System.out.println("(Warning) Optional profanity file not found. If you wish to filter certain words please download the papaya.argo file from the \"https://odyssey6.gitlab.io/argoschat/documentation/\" page and place it into the server directory.");
             System.out.println("(Warning) This warning may occur when running the server .jar when the terminal is not cd into the .jar's directory.");
         }
@@ -171,7 +167,6 @@ public class ServerController extends Thread {
             out.close();
         }
         catch(Exception e) {
-            //e.printStackTrace();
             System.out.println("(Error) Could not generate secret UUID Key. Please report this to the issue tracker.");    
         }
     }

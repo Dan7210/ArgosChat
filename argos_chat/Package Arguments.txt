@@ -1,0 +1,1 @@
+jpackage --verbose --name ArgosChat --input target --main-jar argos_chat-1.1.0-shaded.jar --main-class dan.argos.Main --win-shortcut --icon src/main/resources/dan/argos/icon.ico
